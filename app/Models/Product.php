@@ -16,7 +16,6 @@ class Product extends Model
         'category_id',
         'gofood_link',
         'shopeefood_link',
-        'whatsapp_link'
     ];
 
     public function category() {

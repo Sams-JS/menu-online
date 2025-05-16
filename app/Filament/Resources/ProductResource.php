@@ -85,12 +85,14 @@ class ProductResource extends Resource
                     ->label('GF')
                     ->boolean()
                     ->trueIcon('heroicon-o-check-circle')
-                    ->falseIcon('heroicon-o-x-circle'),
+                    ->falseIcon('heroicon-o-x-circle')
+                    ->getStateUsing(fn ($record)=>!empty($record->gofood_link)),
                 IconColumn::make('shopeefood_link')
                     ->label('SF')
                     ->boolean()
                     ->trueIcon('heroicon-o-check-circle')
                     ->falseIcon('heroicon-o-x-circle')
+                    ->getStateUsing(fn ($record)=>!empty($record->shopeefood_link))
             ])
             ->filters([
                 //
