@@ -41,7 +41,7 @@
             </div>
             <div class="grid mx-4 mt-4 col-span-2">
                 <div>
-                    <h3 class="text-lg font-semibold text-sm md:text-base lg:text-lg">{{ $product->product_name }}</h3>
+                    <h3 class="font-semibold text-sm md:text-base lg:text-lg">{{ $product->product_name }}</h3>
                     <p class="text-gray-600 text-sm md:text-base">Rp. {{ number_format($product->price, 0, ',', '.') }}</p>
                 </div>
                 <div class="link flex gap-2 place-self-end mb-4 lg:mb-3 xl:mb-4">
