@@ -45,8 +45,10 @@ class CategoryResource extends Resource
                 TextColumn::make('category_name')
                     ->label('Kategori')
                     ->searchable()
-                    ->sortable()
-            ])
+                    ->sortable(),
+                TextColumn::make('product_count')
+
+                ])
             ->filters([
                 //
             ])
