@@ -48,7 +48,7 @@ class CategoryResource extends Resource
                     ->sortable(),
                 TextColumn::make('product_count')
                     ->label('Jumlah Produk')
-
+                    ->counts('product')
                 ])
             ->filters([
                 //
