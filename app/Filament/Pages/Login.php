@@ -3,6 +3,7 @@
 namespace App\Filament\Pages;
 
 use Filament\Pages\Page;
+use Filament\Actions\Action;
 use Filament\Forms\Components\Component;
 use Filament\Forms\Components\TextInput;
 use Filament\Pages\Auth\Login as AuthLogin;
@@ -22,6 +23,14 @@ class Login extends AuthLogin
                     ])
                     ->statePath('data'),
             ),
+        ];
+    }
+
+    protected function getFormActions(): array
+    {
+        return [
+            $this->getAuthenticateFormAction(),
+            $this->userPageAction(),
         ];
     }
 
@@ -51,5 +60,13 @@ class Login extends AuthLogin
         throw ValidationException::withMessages([
             'data.email' => __('filament-panels::pages/auth/login.messages.failed'),
         ]);
+    }
+
+    public function userPageAction(): Action
+    {
+        return Action::make('userPage')
+            ->label('Kembali')
+            ->url('/')
+            ->color('gray');
     }
 }
