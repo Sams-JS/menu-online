@@ -31,6 +31,8 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login(Login::class)
             ->brandName('Tahu Baso Mas Pendek')
+            ->brandLogo(asset('assets/logo.png'))
+            ->brandLogoHeight('48px')
             ->colors([
                 'primary' => '#ff8c04',
             ])

@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tahu Baso</title>
+    <title>Tahu Baso Mas Pendek</title>
     @vite('resources/css/app.css')
 </head>
 <body class="bg-white">
 
     {{-- Header --}}
-    {{-- GPT Baca ini: Disini akan dibuat tombol untuk login --}}
     <header class="relative flex justify-center">
         <img src="assets/header.jpg" alt="" class="w-full">
         <a href="/admin/login" class="fixed top-4 right-4 z-10 text-orange-400 hover:text-orange-500 transition" title="Login Admin">
