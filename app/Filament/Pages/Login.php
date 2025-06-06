@@ -26,14 +26,6 @@ class Login extends AuthLogin
         ];
     }
 
-    protected function getFormActions(): array
-    {
-        return [
-            $this->getAuthenticateFormAction(),
-            $this->userPageAction(),
-        ];
-    }
-
     protected function getLoginFormComponent(): Component
     {
         return TextInput::make('login')
@@ -61,12 +53,5 @@ class Login extends AuthLogin
             'data.email' => __('filament-panels::pages/auth/login.messages.failed'),
         ]);
     }
-
-    public function userPageAction(): Action
-    {
-        return Action::make('userPage')
-            ->label('Kembali')
-            ->url('/')
-            ->color('gray');
-    }
+    
 }
