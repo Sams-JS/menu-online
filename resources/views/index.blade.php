@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tahu Baso Mas Pendek</title>
     @vite('resources/css/app.css')
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-white">
 
@@ -42,8 +43,9 @@
         </div>
     </header>
 
-    <div class="px-4">
-        <input type="text" placeholder="Cari menu" class="border rounded-lg w-full p-2 mb-6" />
+    <div class="px-4 relative">
+        <input type="text" id="searchInput" placeholder="Cari menu" class="border rounded-lg w-full p-2 mb-6" autocomplete="off" />
+        <ul id="searchResults" class="absolute bg-white border rounded-md w-full max-h-60 overflow-auto shadow-lg z-50 hidden"></ul>
     </div>
 
     {{-- Navbar --}}
@@ -52,7 +54,7 @@
             <ul class="inline-flex gap-3 md:gap-5">
                 @foreach ($categories as $category)
                 <li>
-                    <a href="#{{ $category->category_name }}" class="text-xs md:text-base lg:text-lg font-bold rounded-lg text-neutral-400 hover:text-neutral-950 transition duration-300 ease-in-out">
+                    <a href="#{{ $category->category_name }}" class="text-base lg:text-lg font-bold rounded-lg text-neutral-400 hover:text-neutral-950 transition duration-300 ease-in-out">
                         {{ $category->category_name }}
                     </a>
                 </li>
@@ -71,7 +73,7 @@
     <h1 id="{{ $category->category_name }}" class="text-2xl font-semibold ps-6 mb-4">{{ $category->category_name }}</h1>
     <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-6 mb-8">
         @foreach ($products->where('category_id', $category->id) as $product)
-        <div class="bg-white rounded-lg shadow-md grid grid-cols-3 gap-2 border-1 border-gray-300">
+        <div id="product-{{ $product->id }}" class="bg-white rounded-lg shadow-md grid grid-cols-3 gap-2 border-1 border-gray-300">
             <div class="aspect-square w-full m-3 overflow-hidden rounded-lg border-1 border-gray-300 justify-self-start ">
                 <img src="storage/{{ $product->image }}" alt="Dish" class="w-full h-full object-cover object-center " />
             </div>
@@ -172,6 +174,84 @@
                 dropdownMenu.classList.add("hidden");
             }
         });
+
+        // Search Bar
+        document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+
+        // Ambil semua produk dan simpan ke array untuk pencarian
+        const products = [
+            @foreach($products as $product)
+            {
+                id: "{{ $product->id }}",
+                name: "{{ $product->product_name }}",
+                category: "{{ $categories->find($product->category_id)->category_name }}"
+            },
+            @endforeach
+        ];
+
+        function filterProducts(query) {
+            if(!query) return [];
+            query = query.toLowerCase();
+            return products.filter(p => 
+                p.name.toLowerCase().includes(query) ||  // cari di nama produk
+                p.category.toLowerCase().includes(query)  // cari di nama kategori
+            );
+        }
+
+        function clearResults() {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+        }
+
+        searchInput.addEventListener('input', function() {
+            const query = this.value.trim();
+            const filtered = filterProducts(query);
+            searchResults.innerHTML = '';
+
+            if(query === '') {
+                clearResults();
+                return;
+            }
+
+            if(filtered.length === 0) {
+                searchResults.innerHTML = `<li class="px-4 py-2 text-gray-500 cursor-default">Produk tidak dikenali</li>`;
+                searchResults.style.display = 'block';
+                return;
+            }
+
+            filtered.forEach(product => {
+                const li = document.createElement('li');
+                li.classList.add('px-4', 'py-2', 'cursor-pointer', 'hover:bg-gray-200');
+                li.textContent = `${product.name} - ${product.category}`;
+                li.dataset.productId = product.id;
+                searchResults.appendChild(li);
+            });
+            searchResults.style.display = 'block';
+        });
+
+        // Ketika klik hasil pencarian, scroll ke produk
+        searchResults.addEventListener('click', function(e) {
+            const li = e.target.closest('li');
+            if(!li || li.textContent === "Produk tidak dikenali") return;
+
+            const productId = li.dataset.productId;
+            const productElement = document.getElementById(`product-${productId}`);
+            if(productElement) {
+                productElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                clearResults();
+                searchInput.value = '';
+            }
+        });
+
+        // Jika klik di luar hasil pencarian dan input, sembunyikan hasil
+        document.addEventListener('click', function(e) {
+            if(!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                clearResults();
+            }
+        });
+    });
     </script>
 </body>
 </html>
