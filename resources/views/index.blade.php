@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tahu Baso Mas Pendek</title>
     @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
+    
 </head>
 <body class="bg-white">
 
@@ -93,7 +95,7 @@
                     @endif
 
                     @if($product->gofood_link)
-                        <a class="text-white text-xs md:text-sm xl:text-base inline bg-orange-400 hover:bg-neutral-50 hover:text-orange-400 border border-orange-400 py-1 px-2 rounded-full transition duration-300 ease-in-out" href="{{ $product->gofood_link }}" target="_blank">
+                        <a class="text-white text-xs md:text-sm xl:text-base inline bg-orange-400 hover:bg-white hover:text-orange-400 border border-orange-400 py-1 px-2 rounded-full transition duration-300 ease-in-out" href="{{ $product->gofood_link }}" target="_blank">
                             GoFood
                         </a>
                     @else
@@ -110,75 +112,21 @@
     @endforeach
 
     {{-- Footer --}}
-    <footer class="bg-orange-400 flex justify-center p-4">
-        <p class="text-neutral-50 text-xs md:text-base">&copy;2025 Tahu Baso Khas Semarang Mas Pendek.</p>
+    <footer class="bg-orange-400 flex flex-col items-center justify-center gap-2 p-4 md:flex-row md:justify-center md:gap-4">
+        <p class="text-white text-xs md:text-base">&copy;2025 Tahu Baso Khas Semarang Mas Pendek.</p>
+        <span class="text-white hidden md:inline">|</span>
+        <a href="https://wa.me/6289637877707" target="_blank" class="flex items-center text-white text-xs md:text-base">
+            <!-- WhatsApp Icon -->
+            <svg class="w-4 h-4 mr-1 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20.52 3.48A11.88 11.88 0 0012 0C5.38 0 .01 5.37 0 12a11.9 11.9 0 001.64 6L0 24l6.37-1.67a11.86 11.86 0 005.63 1.44h.01c6.62 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52zM12 22.1a10.1 10.1 0 01-5.14-1.4l-.37-.22-3.78.99 1-3.68-.24-.38A10.1 10.1 0 012 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10.1-10 10.1zm5.48-7.53c-.3-.15-1.78-.88-2.06-.97-.27-.1-.47-.15-.67.15s-.77.97-.94 1.17c-.17.2-.35.22-.64.07s-1.25-.46-2.38-1.46a8.9 8.9 0 01-1.64-2.04c-.17-.3 0-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.38 0-.53s-.67-1.6-.92-2.2c-.24-.58-.49-.5-.67-.5l-.57-.01c-.2 0-.52.07-.8.38s-1.05 1.03-1.05 2.5 1.07 2.9 1.22 3.1c.15.2 2.1 3.2 5.07 4.48.7.3 1.25.47 1.68.6.7.22 1.33.19 1.83.12.56-.08 1.78-.73 2.03-1.44.25-.7.25-1.3.18-1.44-.07-.13-.27-.2-.57-.35z"/>
+            </svg>
+            <span>0896-3787-7707</span>
+        </a>
     </footer>
+
 
     {{-- JavaScript --}}
     <script>
-        const navbar = document.getElementById("navbar");
-        const categoryNavbar = document.getElementById("categoryNavbar");
-        const placeholder = document.getElementById("navbarPlaceholder");
-        const navbarOffsetTop = navbar.offsetTop;
-        const navbarHeight = navbar.offsetHeight;
-        const adminLoginLink = document.getElementById("adminLoginLink");
-        const adminLinkContainer = document.getElementById("adminLinkContainer");
-        const headerControls = document.getElementById("headerControls");
-        const navbarControls = document.getElementById("navbarControls");
-        const dropdownContainer = document.getElementById("dropdownContainer");
-
-        window.addEventListener("scroll", () => {
-            if (window.pageYOffset >= navbarOffsetTop) {
-                navbar.classList.add("fixed", "top-0", "shadow-md");
-                placeholder.style.display = "block";
-                placeholder.style.height = `${navbarHeight}px`;
-                // Pindahkan tombol login ke navbar
-                // Pindahkan dropdown dan admin link ke navbar jika belum ada
-                if (!navbarControls.contains(dropdownContainer)) {
-                    navbarControls.appendChild(dropdownContainer);
-                    navbarControls.appendChild(adminLoginLink);
-                    // Tambahkan 'flex', hapus 'hidden'
-                    navbarControls.classList.remove("hidden");
-                    navbarControls.classList.add("flex");
-                    categoryNavbar.classList.remove("mx-auto")
-                }
-            } else {
-                navbar.classList.remove("fixed", "top-0", "shadow-md");
-                placeholder.style.display = "none";
-
-                // Kembalikan tombol login ke header
-                if (!headerControls.contains(dropdownContainer)) {
-                    headerControls.appendChild(dropdownContainer);
-                    headerControls.appendChild(adminLoginLink);
-                }
-                // Sembunyikan: hapus flex, tambahkan hidden
-                navbarControls.classList.remove("flex");
-                navbarControls.classList.add("hidden");
-                categoryNavbar.classList.add("mx-auto")
-            }
-        });
-
-        // Dropdown toggle
-        const dropdownToggle = document.getElementById("dropdownToggle");
-        const dropdownMenu = document.getElementById("dropdownMenu");
-
-        dropdownToggle.addEventListener("click", (e) => {
-            e.stopPropagation();
-            dropdownMenu.classList.toggle("hidden");
-        });
-
-        // Tutup dropdown jika klik di luar
-        document.addEventListener("click", (e) => {
-            if (!dropdownMenu.classList.contains("hidden")) {
-                dropdownMenu.classList.add("hidden");
-            }
-        });
-
-        // Search Bar
-        document.addEventListener('DOMContentLoaded', function () {
-        const searchInput = document.getElementById('searchInput');
-        const searchResults = document.getElementById('searchResults');
-
         // Ambil semua produk dan simpan ke array untuk pencarian
         const products = [
             @foreach($products as $product)
@@ -189,68 +137,6 @@
             },
             @endforeach
         ];
-
-        function filterProducts(query) {
-            if(!query) return [];
-            query = query.toLowerCase();
-            return products.filter(p => 
-                p.name.toLowerCase().includes(query) ||  // cari di nama produk
-                p.category.toLowerCase().includes(query)  // cari di nama kategori
-            );
-        }
-
-        function clearResults() {
-            searchResults.innerHTML = '';
-            searchResults.style.display = 'none';
-        }
-
-        searchInput.addEventListener('input', function() {
-            const query = this.value.trim();
-            const filtered = filterProducts(query);
-            searchResults.innerHTML = '';
-
-            if(query === '') {
-                clearResults();
-                return;
-            }
-
-            if(filtered.length === 0) {
-                searchResults.innerHTML = `<li class="px-4 py-2 text-gray-500 cursor-default">Menu tidak dikenali</li>`;
-                searchResults.style.display = 'block';
-                return;
-            }
-
-            filtered.forEach(product => {
-                const li = document.createElement('li');
-                li.classList.add('px-4', 'py-2', 'cursor-pointer', 'hover:bg-gray-200');
-                li.textContent = `${product.name} - ${product.category}`;
-                li.dataset.productId = product.id;
-                searchResults.appendChild(li);
-            });
-            searchResults.style.display = 'block';
-        });
-
-        // Ketika klik hasil pencarian, scroll ke produk
-        searchResults.addEventListener('click', function(e) {
-            const li = e.target.closest('li');
-            if(!li || li.textContent === "Menu tidak dikenali") return;
-
-            const productId = li.dataset.productId;
-            const productElement = document.getElementById(`product-${productId}`);
-            if(productElement) {
-                productElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                clearResults();
-                searchInput.value = '';
-            }
-        });
-
-        // Jika klik di luar hasil pencarian dan input, sembunyikan hasil
-        document.addEventListener('click', function(e) {
-            if(!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-                clearResults();
-            }
-        });
-    });
     </script>
 </body>
 </html>
