@@ -88,7 +88,7 @@
                             ShopeeFood
                         </a>
                     @else
-                        <span class="text-gray-500 text-xs md:text-sm xl:text-base inline bg-gray-300 py-1 px-2 rounded-full" disabled>
+                        <span class="text-gray-500 text-xs md:text-sm xl:text-base inline bg-gray-300 py-1 px-2 rounded-full">
                             ShopeeFood
                         </span>
                     @endif
@@ -98,7 +98,7 @@
                             GoFood
                         </a>
                     @else
-                        <span class="text-gray-500 text-xs md:text-sm xl:text-base inline bg-gray-300 py-1 px-2 rounded-full" disabled>
+                        <span class="text-gray-500 text-xs md:text-sm xl:text-base inline bg-gray-300 py-1 px-2 rounded-full">
                             ShopeeFood
                         </span>
                     @endif
