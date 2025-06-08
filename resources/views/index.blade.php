@@ -215,7 +215,7 @@
             }
 
             if(filtered.length === 0) {
-                searchResults.innerHTML = `<li class="px-4 py-2 text-gray-500 cursor-default">Produk tidak dikenali</li>`;
+                searchResults.innerHTML = `<li class="px-4 py-2 text-gray-500 cursor-default">Menu tidak dikenali</li>`;
                 searchResults.style.display = 'block';
                 return;
             }
@@ -233,7 +233,7 @@
         // Ketika klik hasil pencarian, scroll ke produk
         searchResults.addEventListener('click', function(e) {
             const li = e.target.closest('li');
-            if(!li || li.textContent === "Produk tidak dikenali") return;
+            if(!li || li.textContent === "Menu tidak dikenali") return;
 
             const productId = li.dataset.productId;
             const productElement = document.getElementById(`product-${productId}`);
