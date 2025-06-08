@@ -13,7 +13,7 @@
     <header class="relative flex justify-center">
         <img src="assets/header.jpg" alt="" class="w-full">
 
-        <div class="fixed top-4 right-4 z-10 flex items-center gap-2" id="headerControls">
+        <div class="fixed top-4 right-4 md:right-8 z-10 flex items-center gap-2" id="headerControls">
             <!-- Dropdown kategori -->
             <div class="relative" id="dropdownContainer">
                 <button id="dropdownToggle" class="text-xs md:text-sm font-bold text-neutral-600 hover:text-neutral-900 border border-neutral-300 rounded px-2 py-1 bg-white shadow-sm">
@@ -47,8 +47,8 @@
     </div>
 
     {{-- Navbar --}}
-    <navbar id="navbar" class="p-4 flex items-center justify-between gap-3 bg-white w-full">
-        <div class="overflow-x-auto whitespace-nowrap max-w-full mx-auto">
+    <navbar id="navbar" class="py-4 px-4 md:px-8 flex items-center justify-between gap-3 bg-white w-full">
+        <div id="categoryNavbar" class="overflow-x-auto whitespace-nowrap max-w-full mx-auto">
             <ul class="inline-flex gap-3 md:gap-5">
                 @foreach ($categories as $category)
                 <li>
@@ -116,6 +116,7 @@
     {{-- JavaScript --}}
     <script>
         const navbar = document.getElementById("navbar");
+        const categoryNavbar = document.getElementById("categoryNavbar");
         const placeholder = document.getElementById("navbarPlaceholder");
         const navbarOffsetTop = navbar.offsetTop;
         const navbarHeight = navbar.offsetHeight;
@@ -138,6 +139,7 @@
                     // Tambahkan 'flex', hapus 'hidden'
                     navbarControls.classList.remove("hidden");
                     navbarControls.classList.add("flex");
+                    categoryNavbar.classList.remove("mx-auto")
                 }
             } else {
                 navbar.classList.remove("fixed", "top-0", "shadow-md");
@@ -151,6 +153,7 @@
                 // Sembunyikan: hapus flex, tambahkan hidden
                 navbarControls.classList.remove("flex");
                 navbarControls.classList.add("hidden");
+                categoryNavbar.classList.add("mx-auto")
             }
         });
 
