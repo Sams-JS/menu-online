@@ -45,7 +45,7 @@
 
     <div class="px-4 relative">
         <input type="text" id="searchInput" placeholder="Cari menu" class="border rounded-lg w-full p-2 mb-6" autocomplete="off" />
-        <ul id="searchResults" class="absolute bg-white border rounded-md w-full max-h-60 overflow-auto shadow-lg z-50 hidden"></ul>
+        <ul id="searchResults" class="absolute bg-white border rounded-md max-h-60 overflow-auto shadow-lg hidden"></ul>
     </div>
 
     {{-- Navbar --}}
