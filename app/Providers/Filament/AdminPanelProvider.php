@@ -33,6 +33,8 @@ class AdminPanelProvider extends PanelProvider
             ->brandName('Tahu Baso Mas Pendek')
             ->brandLogo(asset('assets/logo.png'))
             ->brandLogoHeight('48px')
+            ->profile()
+            ->passwordReset()
             ->colors([
                 'primary' => '#ff8c04',
             ])
