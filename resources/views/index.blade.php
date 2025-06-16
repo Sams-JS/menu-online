@@ -70,22 +70,22 @@
 
     {{-- Content --}}
     @foreach ($categories as $category)
-    @if ($products->where('category_id', $category->id)->count()>0)
+    @if ($menus->where('category_id', $category->id)->count()>0)
     <h1 id="{{ $category->category_name }}" class="text-2xl font-semibold ps-6 mb-4">{{ $category->category_name }}</h1>
     <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-6 mb-8">
-        @foreach ($products->where('category_id', $category->id) as $product)
-        <div id="product-{{ $product->id }}" class="bg-white rounded-lg shadow-md grid grid-cols-3 gap-2 border-1 border-gray-300">
+        @foreach ($menus->where('category_id', $category->id) as $menu)
+        <div id="menu-{{ $menu->id }}" class="bg-white rounded-lg shadow-md grid grid-cols-3 gap-2 border-1 border-gray-300">
             <div class="aspect-square w-full m-3 overflow-hidden rounded-lg border-1 border-gray-300 justify-self-start ">
-                <img src="storage/{{ $product->image }}" alt="Dish" class="w-full h-full object-cover object-center " />
+                <img src="storage/{{ $menu->image }}" alt="Dish" class="w-full h-full object-cover object-center " />
             </div>
             <div class="grid mx-4 mt-4 col-span-2">
                 <div>
-                    <h3 class="font-semibold text-sm md:text-base lg:text-lg">{{ $product->product_name }}</h3>
-                    <p class="text-gray-600 text-sm md:text-base">Rp. {{ number_format($product->price, 0, ',', '.') }}</p>
+                    <h3 class="font-semibold text-sm md:text-base lg:text-lg">{{ $menu->menu_name }}</h3>
+                    <p class="text-gray-600 text-sm md:text-base">Rp. {{ number_format($menu->price, 0, ',', '.') }}</p>
                 </div>
                 <div class="link flex gap-2 place-self-end mb-4 lg:mb-3 xl:mb-4">
-                    @if($product->shopeefood_link)
-                        <a class="text-white text-xs md:text-sm xl:text-base inline bg-orange-400 hover:bg-white hover:text-orange-400 border border-orange-400 py-1 px-2 rounded-full transition duration-300 ease-in-out" href="{{ $product->shopeefood_link }}" target="_blank">
+                    @if($menu->shopeefood_link)
+                        <a class="text-white text-xs md:text-sm xl:text-base inline bg-orange-400 hover:bg-white hover:text-orange-400 border border-orange-400 py-1 px-2 rounded-full transition duration-300 ease-in-out" href="{{ $menu->shopeefood_link }}" target="_blank">
                             ShopeeFood
                         </a>
                     @else
@@ -94,8 +94,8 @@
                         </span>
                     @endif
 
-                    @if($product->gofood_link)
-                        <a class="text-white text-xs md:text-sm xl:text-base inline bg-orange-400 hover:bg-white hover:text-orange-400 border border-orange-400 py-1 px-2 rounded-full transition duration-300 ease-in-out" href="{{ $product->gofood_link }}" target="_blank">
+                    @if($menu->gofood_link)
+                        <a class="text-white text-xs md:text-sm xl:text-base inline bg-orange-400 hover:bg-white hover:text-orange-400 border border-orange-400 py-1 px-2 rounded-full transition duration-300 ease-in-out" href="{{ $menu->gofood_link }}" target="_blank">
                             GoFood
                         </a>
                     @else
@@ -128,12 +128,12 @@
     {{-- JavaScript --}}
     <script>
         // Ambil semua produk dan simpan ke array untuk pencarian
-        const products = [
-            @foreach($products as $product)
+        const menus = [
+            @foreach($menus as $menu)
             {
-                id: "{{ $product->id }}",
-                name: "{{ $product->product_name }}",
-                category: "{{ $categories->find($product->category_id)->category_name }}"
+                id: "{{ $menu->id }}",
+                name: "{{ $menu->menu_name }}",
+                category: "{{ $categories->find($menu->category_id)->category_name }}"
             },
             @endforeach
         ];

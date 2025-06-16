@@ -62,10 +62,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const searchInput = document.getElementById('searchInput');
     const searchResults = document.getElementById('searchResults');
 
-    function filterProducts(query) {
+    function filterMenus(query) {
         if(!query) return [];
         query = query.toLowerCase();
-        return products.filter(p => 
+        return menus.filter(p => 
             p.name.toLowerCase().includes(query) ||  // cari di nama produk
             p.category.toLowerCase().includes(query)  // cari di nama kategori
         );
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     searchInput.addEventListener('input', function() {
         const query = this.value.trim();
-        const filtered = filterProducts(query);
+        const filtered = filterMenus(query);
         searchResults.innerHTML = '';
 
         if(query === '') {
@@ -92,11 +92,11 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        filtered.forEach(product => {
+        filtered.forEach(menu => {
             const li = document.createElement('li');
             li.classList.add('px-4', 'py-2', 'cursor-pointer', 'hover:bg-gray-200');
-            li.textContent = `${product.name} - ${product.category}`;
-            li.dataset.productId = product.id;
+            li.textContent = `${menu.name} - ${menu.category}`;
+            li.dataset.menuId = menu.id;
             searchResults.appendChild(li);
         });
         searchResults.style.display = 'block';
@@ -107,10 +107,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const li = e.target.closest('li');
         if(!li || li.textContent === "Menu tidak dikenali") return;
 
-        const productId = li.dataset.productId;
-        const productElement = document.getElementById(`product-${productId}`);
-        if(productElement) {
-            productElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const menuId = li.dataset.menuId;
+        const menuElement = document.getElementById(`menu-${menuId}`);
+        if(menuElement) {
+            menuElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
             clearResults();
             searchInput.value = '';
         }

@@ -13,7 +13,7 @@ class Category extends Model
         'category_name'
     ];
 
-    public function product() {
-        return $this->hasMany(Product::class);
+    public function menu() {
+        return $this->hasMany(Menu::class);
     }
 }
