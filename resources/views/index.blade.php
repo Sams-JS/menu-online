@@ -9,14 +9,14 @@
     @vite('resources/js/app.js')
     
 </head>
-<body class="bg-white">
+<body>
 
     {{-- Header --}}
     <header class="relative flex justify-center">
         <img src="assets/header.jpg" alt="" class="w-full">
 
         <div class="fixed top-4 right-4 md:right-8 z-10 flex items-center gap-2" id="headerControls">
-            <!-- Dropdown kategori -->
+            {{-- Dropdown kategori --}}
             <div class="relative" id="dropdownContainer">
                 <button id="dropdownToggle" class="text-xs md:text-sm font-bold text-neutral-600 hover:text-neutral-900 border border-neutral-300 rounded px-2 py-1 bg-white shadow-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
