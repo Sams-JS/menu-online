@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\CustomLogin;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\Widgets;
@@ -29,7 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->login(Login::class)
+            ->login(CustomLogin::class)
             ->brandName('Tahu Baso Mas Pendek')
             ->brandLogo(asset('assets/logo.png'))
             ->brandLogoHeight('48px')
