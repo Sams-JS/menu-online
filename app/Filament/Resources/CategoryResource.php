@@ -20,9 +20,9 @@ class CategoryResource extends Resource
     protected static ?string $model = Category::class;
 
     protected static ?string $slug = 'kelola_kategori';
-    protected static ?string $navigationLabel = 'Kategori Menu';
-    protected static ?string $pluralModelLabel = 'Kategori Menu';
-    protected static ?string $modelLabel = 'Kategori Menu';
+    protected static ?string $navigationLabel = 'Kelola Kategori';
+    protected static ?string $pluralModelLabel = 'Daftar Kategori';
+    protected static ?string $modelLabel = 'Kategori';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
@@ -46,11 +46,11 @@ class CategoryResource extends Resource
                     ->label('Kategori')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('product_count')
-                    ->label('Jumlah Produk')
-                    ->counts('product')
+                TextColumn::make('menu_count')
+                    ->label('Jumlah Menu')
+                    ->counts('menu')
                     ->sortable()
-                ])
+            ])
             ->filters([
                 //
             ])
