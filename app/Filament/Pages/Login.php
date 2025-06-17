@@ -6,6 +6,7 @@ use Filament\Pages\Page;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Component;
 use Filament\Forms\Components\TextInput;
+use Illuminate\Contracts\Support\Htmlable;
 use Filament\Pages\Auth\Login as AuthLogin;
 use Illuminate\Validation\ValidationException;
 
@@ -34,6 +35,11 @@ class Login extends AuthLogin
             ->autocomplete()
             ->autofocus()
             ->extraInputAttributes(['tabindex' => 1]);
+    }
+
+    public function getHeading(): string | Htmlable
+    {
+        return 'Bukan Admin? Silahkan Kembali';
     }
 
     protected function getCredentialsFromFormData(array $data): array
