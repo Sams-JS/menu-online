@@ -20,9 +20,12 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $slug = 'kelola_admin';
+    protected static ?string $navigationLabel = 'Kelola Admin';
+    protected static ?string $pluralModelLabel = 'Daftar Admin';
+    protected static ?string $modelLabel = 'Admin';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
-    
     public static function canViewAny(): bool
     {
         return Filament::auth()->user()?->is_owner === 1;
@@ -33,14 +36,15 @@ class UserResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->required()
                     ->label('Nama')
-                    ->placeholder('Masukan nama'),
+                    ->placeholder('Masukan nama')
+                    ->required(),
                 TextInput::make('email')
-                    ->required()
-                    ->placeholder('Masukan email'),
+                    ->placeholder('Masukan email')
+                    ->required(),
                 TextInput::make('password')
-                    ->required()
+                    ->placeholder('Masukan password')
+                    ->required(),
             ]);
     }
 
@@ -63,6 +67,7 @@ class UserResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
