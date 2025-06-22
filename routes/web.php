@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\MenuController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MenuController;
 
-Route::get('/', [MenuController::class, 'index'])->name('home');
+Route::get('/', [MenuController::class, 'index']);
