@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-gray-100">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +8,9 @@
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
     
+    <script type="module" src="https://cdn.jsdelivr.net/gh/domyid/tracker@main/index.js"></script>
 </head>
 <body>
-
     {{-- Header --}}
     <header class="relative flex justify-center">
         <img src="assets/header.jpg" alt="" class="w-full">
@@ -74,78 +74,74 @@
     <h1 id="{{ $category->category_name }}" class="text-2xl font-semibold ps-6 mb-4">{{ $category->category_name }}</h1>
     <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-6 mb-8">
         @foreach ($menus->where('category_id', $category->id) as $menu)
-        <div id="menu-{{ $menu->id }}" class="bg-white rounded-lg shadow-md grid grid-cols-3 gap-2 border border-gray-300 min-h-[220px]">
-    <div class="aspect-square w-full m-3 overflow-hidden rounded-lg border border-gray-300 justify-self-start">
-        <img src="storage/{{ $menu->image }}" alt="Dish" class="w-full h-full object-cover object-center" />
-    </div>
-    <div class="grid grid-rows-[auto_1fr_auto] mx-4 mt-4 col-span-2">
-        <div>
-            <h3 class="font-semibold text-sm md:text-base lg:text-lg break-words">{{ $menu->menu_name }}</h3>
-            <p class="text-gray-600 text-sm md:text-base">Rp. {{ number_format($menu->price, 0, ',', '.') }}</p>
-        </div>
-        <div class="link flex flex-wrap gap-2 mt-auto mb-4 lg:mb-3 xl:mb-4">
-            <!-- ShopeeFood -->
-            @if($menu->shopeefood_link)
-                <a class="text-white text-xs md:text-sm xl:text-base inline bg-orange-400 hover:bg-white hover:text-orange-400 border border-orange-400 py-1 px-2 rounded-full transition duration-300 ease-in-out" href="{{ $menu->shopeefood_link }}" target="_blank">
-                    ShopeeFood
+        <div id="menu-{{ $menu->id }}" class="bg-white rounded-lg shadow-md p-4 flex flex-col border-1 border-gray-300">
+            <div class="w-full flex">
+                <div class="w-1/3 aspect-square overflow-hidden rounded-lg border-1 border-gray-300 justify-self-start ">
+                    <img src="storage/{{ $menu->image }}" alt="Dish" class="w-full h-full object-cover object-center " />
+                </div>
+                <div class="mx-4 col-span-2">
+                        <h3 class="font-semibold text-sm md:text-base lg:text-lg">{{ $menu->menu_name }}</h3>
+                        <p class="text-gray-600 text-sm md:text-base">Rp. {{ number_format($menu->price, 0, ',', '.') }}</p>
+                </div>
+            </div>
+            <div class="link flex flex-wrap justify-center gap-2 mt-4">
+                <!-- ShopeeFood -->
+                @if($menu->shopeefood_link)
+                    <a class="text-white text-xs md:text-sm xl:text-base inline bg-orange-400 hover:bg-white hover:text-orange-400 border border-orange-400 py-1 px-2 rounded-full transition duration-300 ease-in-out" href="{{ $menu->shopeefood_link }}" target="_blank">
+                        ShopeeFood
+                    </a>
+                @else
+                    <span class="text-gray-500 text-xs md:text-sm xl:text-base inline bg-gray-300 py-1 px-2 rounded-full">ShopeeFood</span>
+                @endif
+
+                <!-- GoFood -->
+                @if($menu->gofood_link)
+                    <a class="text-white text-xs md:text-sm xl:text-base inline bg-orange-400 hover:bg-white hover:text-orange-400 border border-orange-400 py-1 px-2 rounded-full transition duration-300 ease-in-out" href="{{ $menu->gofood_link }}" target="_blank">
+                        GoFood
+                    </a>
+                @else
+                    <span class="text-gray-500 text-xs md:text-sm xl:text-base inline bg-gray-300 py-1 px-2 rounded-full">GoFood</span>
+                @endif
+
+                <!-- WhatsApp -->
+                <a 
+                    href="https://wa.me/6281222267652?text=Halo%20saya%20mau%20pesan%20menu%20{{ urlencode($menu->menu_name) }}%20seharga%20Rp{{ number_format($menu->price, 0, ',', '.') }}" 
+                    target="_blank"
+                    class="text-white text-xs md:text-sm xl:text-base inline bg-orange-400 hover:bg-white hover:text-orange-400 border border-orange-400 py-1 px-2 rounded-full transition duration-300 ease-in-out">
+                    WhatsApp
                 </a>
-            @else
-                <span class="text-gray-500 text-xs md:text-sm xl:text-base inline bg-gray-300 py-1 px-2 rounded-full">ShopeeFood</span>
-            @endif
-
-            <!-- GoFood -->
-            @if($menu->gofood_link)
-                <a class="text-white text-xs md:text-sm xl:text-base inline bg-orange-400 hover:bg-white hover:text-orange-400 border border-orange-400 py-1 px-2 rounded-full transition duration-300 ease-in-out" href="{{ $menu->gofood_link }}" target="_blank">
-                    GoFood
-                </a>
-            @else
-                <span class="text-gray-500 text-xs md:text-sm xl:text-base inline bg-gray-300 py-1 px-2 rounded-full">GoFood</span>
-            @endif
-
-            <!-- WhatsApp -->
-            <a 
-                href="https://wa.me/6281222267652?text=Halo%20saya%20mau%20pesan%20menu%20{{ urlencode($menu->menu_name) }}%20seharga%20Rp{{ number_format($menu->price, 0, ',', '.') }}" 
-                target="_blank"
-                class="text-white text-xs md:text-sm xl:text-base inline bg-green-500 hover:bg-white hover:text-green-500 border border-green-500 py-1 px-2 rounded-full transition duration-300 ease-in-out">
-                WhatsApp
-            </a>
+            </div>
         </div>
-    </div>
-</div>
-
         @endforeach
     </section>
     @endif
     @endforeach
 
     <!-- Lokasi di Google Maps -->
-<section class="mt-10 px-4 sm:px-8 md:px-15 lg:px-60 mb-5">
-  <h2 class="text-xl md:text-2xl font-bold text-center mb-4">Lokasi Kami</h2>
-  <div class="flex flex-col md:flex-row items-start gap-4 md:gap-6 p-4 rounded-xl shadow-md bg-white">
-    
-    <!-- Peta -->
-    <div class="w-full md:w-1/2 h-48 md:h-56 rounded-lg overflow-hidden shadow-sm">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1177.675347216066!2d107.5557063346986!3d-6.865190142906437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e5df907adf4b%3A0x391f145567ac066b!2sTahu%20Baso%20khas%20semarang%20mas%20pendek!5e0!3m2!1sid!2sid!4v1753864327583!5m2!1sid!2sid"
-        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
+    <section class="mt-10 px-4 sm:px-8 md:px-15 lg:px-60 mb-5">
+    <h2 class="text-xl md:text-2xl font-bold text-center mb-4">Lokasi Kami</h2>
+    <div class="flex flex-col md:flex-row items-start gap-4 md:gap-6 p-4 rounded-xl shadow-md bg-white">
+        
+        <!-- Peta -->
+        <div class="w-full md:w-1/2 h-48 md:h-56 rounded-lg overflow-hidden shadow-sm">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1177.675347216066!2d107.5557063346986!3d-6.865190142906437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e5df907adf4b%3A0x391f145567ac066b!2sTahu%20Baso%20khas%20semarang%20mas%20pendek!5e0!3m2!1sid!2sid!4v1753864327583!5m2!1sid!2sid"
+            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+        </div>
+
+        <!-- Alamat -->
+        <div class="w-full md:w-1/2 text-sm md:text-base">
+        <h3 class="font-semibold mb-1">Alamat:</h3>
+        <p>
+            Tahu Baso Khas Semarang Mas Pendek<br>
+            Jl. Ciawitali No.45, Citeureup, Kec. Cimahi Utara, Kota Cimahi, Jawa Barat 40512
+        </p>
+        </div>
+
     </div>
-
-    <!-- Alamat -->
-    <div class="w-full md:w-1/2 text-sm md:text-base">
-      <h3 class="font-semibold mb-1">Alamat:</h3>
-      <p>
-        Tahu Baso Khas Semarang Mas Pendek<br>
-        Jl. Ciawitali No.45, Citeureup, Kec. Cimahi Utara, Kota Cimahi, Jawa Barat 40512
-      </p>
-    </div>
-
-  </div>
-</section>
-
-
-
+    </section>
 
     {{-- Footer --}}
     <footer class="bg-orange-400 flex flex-col items-center justify-center gap-2 p-4 md:flex-row md:justify-center md:gap-4">
@@ -159,7 +155,6 @@
             <span>0896-3787-7707</span>
         </a>
     </footer>
-
 
     {{-- JavaScript --}}
     <script>
