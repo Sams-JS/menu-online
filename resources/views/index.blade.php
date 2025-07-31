@@ -85,7 +85,7 @@
                 </div>
             </div>
             <div class="link flex flex-wrap justify-center gap-2 mt-4">
-                <!-- ShopeeFood -->
+                {{-- ShopeeFood --}}
                 @if($menu->shopeefood_link)
                     <a class="text-white text-xs md:text-sm xl:text-base inline bg-orange-400 hover:bg-white hover:text-orange-400 border border-orange-400 py-1 px-2 rounded-full transition duration-300 ease-in-out" href="{{ $menu->shopeefood_link }}" target="_blank">
                         ShopeeFood
@@ -94,7 +94,7 @@
                     <span class="text-gray-500 text-xs md:text-sm xl:text-base inline bg-gray-300 py-1 px-2 rounded-full">ShopeeFood</span>
                 @endif
 
-                <!-- GoFood -->
+                {{-- GoFood --}}
                 @if($menu->gofood_link)
                     <a class="text-white text-xs md:text-sm xl:text-base inline bg-orange-400 hover:bg-white hover:text-orange-400 border border-orange-400 py-1 px-2 rounded-full transition duration-300 ease-in-out" href="{{ $menu->gofood_link }}" target="_blank">
                         GoFood
@@ -105,7 +105,7 @@
 
                 <!-- WhatsApp -->
                 <a 
-                    href="https://wa.me/6281222267652?text=Halo%20saya%20mau%20pesan%20menu%20{{ urlencode($menu->menu_name) }}%20seharga%20Rp{{ number_format($menu->price, 0, ',', '.') }}" 
+                    href="https://wa.me/6289637877707?text=Halo%20saya%20mau%20pesan%20menu%20{{ urlencode($menu->menu_name) }}%20seharga%20Rp{{ number_format($menu->price, 0, ',', '.') }}" 
                     target="_blank"
                     class="text-white text-xs md:text-sm xl:text-base inline bg-orange-400 hover:bg-white hover:text-orange-400 border border-orange-400 py-1 px-2 rounded-full transition duration-300 ease-in-out">
                     WhatsApp
